@@ -26,14 +26,52 @@ Agent: agents/security-engineer.agent.md
 
 ## Current Agents
 
-The repository starts with four agents:
+The repository starts with five agents:
 
-| Role              | Masterclass guide                                          | Agent                                                                  |
-| ----------------- | ---------------------------------------------------------- | ---------------------------------------------------------------------- |
-| Backend Engineer  | [guides/backend-engineer.md](guides/backend-engineer.md)   | [agents/backend-engineer.agent.md](agents/backend-engineer.agent.md)   |
-| Frontend Engineer | [guides/frontend-engineer.md](guides/frontend-engineer.md) | [agents/frontend-engineer.agent.md](agents/frontend-engineer.agent.md) |
-| Product Manager   | [guides/product-manager.md](guides/product-manager.md)     | [agents/product-manager.agent.md](agents/product-manager.agent.md)     |
-| Technical Writer  | [guides/technical-writer.md](guides/technical-writer.md)   | [agents/technical-writer.agent.md](agents/technical-writer.agent.md)   |
+| Role                 | Masterclass guide                                                | Agent                                                                        |
+| -------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Backend Engineer     | [guides/backend-engineer.md](guides/backend-engineer.md)         | [agents/backend-engineer.agent.md](agents/backend-engineer.agent.md)         |
+| Frontend Engineer    | [guides/frontend-engineer.md](guides/frontend-engineer.md)       | [agents/frontend-engineer.agent.md](agents/frontend-engineer.agent.md)       |
+| Product Manager      | [guides/product-manager.md](guides/product-manager.md)           | [agents/product-manager.agent.md](agents/product-manager.agent.md)           |
+| Terraform Specialist | [guides/terraform-specialist.md](guides/terraform-specialist.md) | [agents/terraform-specialist.agent.md](agents/terraform-specialist.agent.md) |
+| Technical Writer     | [guides/technical-writer.md](guides/technical-writer.md)         | [agents/technical-writer.agent.md](agents/technical-writer.agent.md)         |
+
+## Install The Agents
+
+Install the included GitHub Copilot agents into your user-level agents folder:
+
+```sh
+./scripts/install-copilot-agents.sh
+```
+
+By default this copies the `.agent.md` files into `~/.copilot/agents`.
+
+If you want a different location, pass it explicitly:
+
+```sh
+./scripts/install-copilot-agents.sh /path/to/agents
+```
+
+There is also a matching Claude Code installer:
+
+```sh
+./scripts/install-claude-agents.sh
+```
+
+And a Codex installer that writes standalone role files:
+
+```sh
+./scripts/install-codex-agents.sh
+```
+
+And a Gemini CLI installer that converts each `.agent.md` file into a skill:
+
+```sh
+./scripts/install-gemini-agents.sh
+```
+
+By default this writes to `~/.gemini/skills`. If Gemini CLI is already open, run
+`/skills reload` after installing.
 
 ## Why This Exists
 

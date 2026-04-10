@@ -26,15 +26,16 @@ Agent: agents/security-engineer.agent.md
 
 ## Current Agents
 
-The repository starts with five agents:
+The repository includes six agents:
 
-| Role                 | Masterclass guide                                                | Agent                                                                        |
-| -------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| Backend Engineer     | [guides/backend-engineer.md](guides/backend-engineer.md)         | [agents/backend-engineer.agent.md](agents/backend-engineer.agent.md)         |
-| Frontend Engineer    | [guides/frontend-engineer.md](guides/frontend-engineer.md)       | [agents/frontend-engineer.agent.md](agents/frontend-engineer.agent.md)       |
-| Product Manager      | [guides/product-manager.md](guides/product-manager.md)           | [agents/product-manager.agent.md](agents/product-manager.agent.md)           |
-| Terraform Specialist | [guides/terraform-specialist.md](guides/terraform-specialist.md) | [agents/terraform-specialist.agent.md](agents/terraform-specialist.agent.md) |
-| Technical Writer     | [guides/technical-writer.md](guides/technical-writer.md)         | [agents/technical-writer.agent.md](agents/technical-writer.agent.md)         |
+| Role                      | Masterclass guide                                                | Agent                                                                        |
+| ------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Backend Engineer          | [guides/backend-engineer.md](guides/backend-engineer.md)         | [agents/backend-engineer.agent.md](agents/backend-engineer.agent.md)         |
+| Frontend Engineer         | [guides/frontend-engineer.md](guides/frontend-engineer.md)       | [agents/frontend-engineer.agent.md](agents/frontend-engineer.agent.md)       |
+| Product Manager           | [guides/product-manager.md](guides/product-manager.md)           | [agents/product-manager.agent.md](agents/product-manager.agent.md)           |
+| Site Reliability Engineer | [guides/sre.md](guides/sre.md)                                   | [agents/sre.agent.md](agents/sre.agent.md)                                   |
+| Terraform Specialist      | [guides/terraform-specialist.md](guides/terraform-specialist.md) | [agents/terraform-specialist.agent.md](agents/terraform-specialist.agent.md) |
+| Technical Writer          | [guides/technical-writer.md](guides/technical-writer.md)         | [agents/technical-writer.agent.md](agents/technical-writer.agent.md)         |
 
 ## Install The Agents
 

@@ -4,6 +4,8 @@ Custom AI agents built from research-backed masterclass guides.
 
 This repository shares the custom agents I use and will grow over time. Each agent starts as a role-specific masterclass guide created with a research-capable LLM, then gets distilled into a practical GitHub Copilot agent with the built-in `/create-agent` skill.
 
+The repository also includes a workspace-scoped GitHub Copilot skill for generating new masterclass guides directly in chat.
+
 ## Install an Agent
 
 If you want to use the included agents, clone the repository and run the installer for your tool:
@@ -72,6 +74,12 @@ Guide: guides/security-engineer.md
 Agent: agents/security-engineer.agent.md
 ```
 
+## Create a Masterclass Guide in Copilot
+
+This repo includes a workspace skill at `.github/skills/masterclass-guide/`.
+
+In GitHub Copilot Chat, use `/masterclass-guide <role>` to generate a research-first guide that follows the same structure as [prompts/master-class.md](prompts/master-class.md).
+
 ## Why This Exists
 
 Shoutout to [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents/tree/main). That repository was the starting point for this project and showed how useful specialized agents can be.
@@ -86,6 +94,7 @@ That extra step matters. It keeps the agents grounded in durable practitioner gu
 agents/   Ready-to-use agent definitions
 guides/   Source masterclass guides
 prompts/  Prompt templates used to generate the guides
+.github/  Workspace-scoped GitHub Copilot customizations
 ```
 
 ## Add a New Agent

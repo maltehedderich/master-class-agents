@@ -6,6 +6,12 @@ This repository shares the custom agents I use and will grow over time. Each age
 
 The repository also includes a workspace-scoped GitHub Copilot skill for generating new masterclass guides directly in chat.
 
+## Disclaimer
+
+The guides and agents in this repository are independent syntheses of ideas, practices, and public guidance associated with the people, companies, books, frameworks, and platforms they mention. They are not affiliated with, endorsed by, or official guidance from any of those individuals or organizations.
+
+Any third-party names, product names, and trademarks mentioned in this repository belong to their respective owners and are used only for identification and commentary.
+
 ## Install an Agent
 
 If you want to use the included agents, clone the repository and run the installer for your tool:

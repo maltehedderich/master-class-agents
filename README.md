@@ -37,12 +37,13 @@ After installing Gemini CLI skills, run `/skills reload` if Gemini CLI is alread
 
 ## Current Agents
 
-The repository includes nine agents:
+The repository includes ten agents:
 
 | Role                      | Masterclass guide                                                          | Agent                                                                                  |
 | ------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | Backend Engineer          | [guides/backend-engineer.md](guides/backend-engineer.md)                   | [agents/backend-engineer.agent.md](agents/backend-engineer.agent.md)                   |
 | Frontend Engineer         | [guides/frontend-engineer.md](guides/frontend-engineer.md)                 | [agents/frontend-engineer.agent.md](agents/frontend-engineer.agent.md)                 |
+| Growth Hacker             | [guides/growth-hacker.md](guides/growth-hacker.md)                         | [agents/growth-hacker.agent.md](agents/growth-hacker.agent.md)                         |
 | LinkedIn Writer           | [guides/linkedin-writer.md](guides/linkedin-writer.md)                     | [agents/linkedin-writer.agent.md](agents/linkedin-writer.agent.md)                     |
 | Product Manager           | [guides/product-manager.md](guides/product-manager.md)                     | [agents/product-manager.agent.md](agents/product-manager.agent.md)                     |
 | Prompt Engineer           | [guides/prompt-engineer.md](guides/prompt-engineer.md)                     | [agents/prompt-engineer.agent.md](agents/prompt-engineer.agent.md)                     |

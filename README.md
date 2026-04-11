@@ -4,7 +4,53 @@ Custom AI agents built from research-backed masterclass guides.
 
 This repository shares the custom agents I use and will grow over time. Each agent starts as a role-specific masterclass guide created with a research-capable LLM, then gets distilled into a practical GitHub Copilot agent with the built-in `/create-agent` skill.
 
-## Quick Start
+## Install an Agent
+
+If you want to use the included agents, clone the repository and run the installer for your tool:
+
+```sh
+git clone https://github.com/maltehedderich/master-class-agents
+cd master-class-agents
+./scripts/install-copilot-agents.sh
+```
+
+That command installs the GitHub Copilot agents into `~/.copilot/agents` by default.
+
+## Choose an Installer
+
+Each installer copies the included agents into the default folder for a specific tool.
+
+| Tool           | Command                               | Default destination |
+| -------------- | ------------------------------------- | ------------------- |
+| GitHub Copilot | `./scripts/install-copilot-agents.sh` | `~/.copilot/agents` |
+| Claude Code    | `./scripts/install-claude-agents.sh`  | `~/.claude/agents`  |
+| Codex          | `./scripts/install-codex-agents.sh`   | `~/.codex/agents`   |
+| Gemini CLI     | `./scripts/install-gemini-agents.sh`  | `~/.gemini/skills`  |
+
+If you want a different destination, pass it as the first argument:
+
+```sh
+./scripts/install-copilot-agents.sh /path/to/agents
+```
+
+After installing Gemini CLI skills, run `/skills reload` if Gemini CLI is already open.
+
+## Current Agents
+
+The repository includes eight agents:
+
+| Role                      | Masterclass guide                                                          | Agent                                                                                  |
+| ------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Backend Engineer          | [guides/backend-engineer.md](guides/backend-engineer.md)                   | [agents/backend-engineer.agent.md](agents/backend-engineer.agent.md)                   |
+| Frontend Engineer         | [guides/frontend-engineer.md](guides/frontend-engineer.md)                 | [agents/frontend-engineer.agent.md](agents/frontend-engineer.agent.md)                 |
+| LinkedIn Writer           | [guides/linkedin-writer.md](guides/linkedin-writer.md)                     | [agents/linkedin-writer.agent.md](agents/linkedin-writer.agent.md)                     |
+| Product Manager           | [guides/product-manager.md](guides/product-manager.md)                     | [agents/product-manager.agent.md](agents/product-manager.agent.md)                     |
+| Site Reliability Engineer | [guides/site-reliability-engineer.md](guides/site-reliability-engineer.md) | [agents/site-reliability-engineer.agent.md](agents/site-reliability-engineer.agent.md) |
+| Terraform Specialist      | [guides/terraform-specialist.md](guides/terraform-specialist.md)           | [agents/terraform-specialist.agent.md](agents/terraform-specialist.agent.md)           |
+| Technical Educator        | [guides/technical-educator.md](guides/technical-educator.md)               | [agents/technical-educator.agent.md](agents/technical-educator.agent.md)               |
+| Technical Writer          | [guides/technical-writer.md](guides/technical-writer.md)                   | [agents/technical-writer.agent.md](agents/technical-writer.agent.md)                   |
+
+## Create a New Agent
 
 Use this workflow to create a new agent:
 
@@ -23,58 +69,6 @@ Role: Security Engineer
 Guide: guides/security-engineer.md
 Agent: agents/security-engineer.agent.md
 ```
-
-## Current Agents
-
-The repository includes eight agents:
-
-| Role                      | Masterclass guide                                                          | Agent                                                                                  |
-| ------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| Backend Engineer          | [guides/backend-engineer.md](guides/backend-engineer.md)                   | [agents/backend-engineer.agent.md](agents/backend-engineer.agent.md)                   |
-| Frontend Engineer         | [guides/frontend-engineer.md](guides/frontend-engineer.md)                 | [agents/frontend-engineer.agent.md](agents/frontend-engineer.agent.md)                 |
-| LinkedIn Writer           | [guides/linkedin-writer.md](guides/linkedin-writer.md)                     | [agents/linkedin-writer.agent.md](agents/linkedin-writer.agent.md)                     |
-| Product Manager           | [guides/product-manager.md](guides/product-manager.md)                     | [agents/product-manager.agent.md](agents/product-manager.agent.md)                     |
-| Site Reliability Engineer | [guides/site-reliability-engineer.md](guides/site-reliability-engineer.md) | [agents/site-reliability-engineer.agent.md](agents/site-reliability-engineer.agent.md) |
-| Terraform Specialist      | [guides/terraform-specialist.md](guides/terraform-specialist.md)           | [agents/terraform-specialist.agent.md](agents/terraform-specialist.agent.md)           |
-| Technical Educator        | [guides/technical-educator.md](guides/technical-educator.md)               | [agents/technical-educator.agent.md](agents/technical-educator.agent.md)               |
-| Technical Writer          | [guides/technical-writer.md](guides/technical-writer.md)                   | [agents/technical-writer.agent.md](agents/technical-writer.agent.md)                   |
-
-## Install The Agents
-
-Install the included GitHub Copilot agents into your user-level agents folder:
-
-```sh
-./scripts/install-copilot-agents.sh
-```
-
-By default this copies the `.agent.md` files into `~/.copilot/agents`.
-
-If you want a different location, pass it explicitly:
-
-```sh
-./scripts/install-copilot-agents.sh /path/to/agents
-```
-
-There is also a matching Claude Code installer:
-
-```sh
-./scripts/install-claude-agents.sh
-```
-
-And a Codex installer that writes standalone role files:
-
-```sh
-./scripts/install-codex-agents.sh
-```
-
-And a Gemini CLI installer that converts each `.agent.md` file into a skill:
-
-```sh
-./scripts/install-gemini-agents.sh
-```
-
-By default this writes to `~/.gemini/skills`. If Gemini CLI is already open, run
-`/skills reload` after installing.
 
 ## Why This Exists
 

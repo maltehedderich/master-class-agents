@@ -39,7 +39,7 @@ After installing Gemini CLI skills, run `/skills reload` if Gemini CLI is alread
 
 ## Current Agents
 
-The repository includes ten agents:
+The repository includes eleven agents:
 
 | Role                      | Masterclass guide                                                          | Agent                                                                                  |
 | ------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
@@ -53,6 +53,7 @@ The repository includes ten agents:
 | Terraform Specialist      | [guides/terraform-specialist.md](guides/terraform-specialist.md)           | [agents/terraform-specialist.agent.md](agents/terraform-specialist.agent.md)           |
 | Technical Educator        | [guides/technical-educator.md](guides/technical-educator.md)               | [agents/technical-educator.agent.md](agents/technical-educator.agent.md)               |
 | Technical Writer          | [guides/technical-writer.md](guides/technical-writer.md)                   | [agents/technical-writer.agent.md](agents/technical-writer.agent.md)                   |
+| UX Designer               | [guides/ux-designer.md](guides/ux-designer.md)                             | [agents/ux-designer.agent.md](agents/ux-designer.agent.md)                             |
 
 ## Create a New Agent
 

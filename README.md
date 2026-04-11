@@ -39,7 +39,7 @@ After installing Gemini CLI skills, run `/skills reload` if Gemini CLI is alread
 
 ## Current Agents
 
-The repository includes eleven agents:
+The repository includes twelve agents:
 
 | Role                      | Masterclass guide                                                          | Agent                                                                                  |
 | ------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
@@ -47,6 +47,7 @@ The repository includes eleven agents:
 | Frontend Engineer         | [guides/frontend-engineer.md](guides/frontend-engineer.md)                 | [agents/frontend-engineer.agent.md](agents/frontend-engineer.agent.md)                 |
 | Growth Hacker             | [guides/growth-hacker.md](guides/growth-hacker.md)                         | [agents/growth-hacker.agent.md](agents/growth-hacker.agent.md)                         |
 | LinkedIn Writer           | [guides/linkedin-writer.md](guides/linkedin-writer.md)                     | [agents/linkedin-writer.agent.md](agents/linkedin-writer.agent.md)                     |
+| LlamaIndex Specialist     | [guides/llamaindex-workflows.md](guides/llamaindex-workflows.md)           | [agents/llamaindex-specialist.agent.md](agents/llamaindex-specialist.agent.md)         |
 | Product Manager           | [guides/product-manager.md](guides/product-manager.md)                     | [agents/product-manager.agent.md](agents/product-manager.agent.md)                     |
 | Prompt Engineer           | [guides/prompt-engineer.md](guides/prompt-engineer.md)                     | [agents/prompt-engineer.agent.md](agents/prompt-engineer.agent.md)                     |
 | Site Reliability Engineer | [guides/site-reliability-engineer.md](guides/site-reliability-engineer.md) | [agents/site-reliability-engineer.agent.md](agents/site-reliability-engineer.agent.md) |

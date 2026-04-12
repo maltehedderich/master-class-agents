@@ -45,7 +45,7 @@ After installing Gemini CLI skills, run `/skills reload` if Gemini CLI is alread
 
 ## Current Agents
 
-The repository includes fifteen agents:
+The repository includes sixteen agents:
 
 | Role                      | Masterclass guide                                                          | Agent                                                                                  |
 | ------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
@@ -60,6 +60,7 @@ The repository includes fifteen agents:
 | Privacy Policy Expert     | [guides/privacy-policy-expert.md](guides/privacy-policy-expert.md)         | [agents/privacy-policy-expert.agent.md](agents/privacy-policy-expert.agent.md)         |
 | Security Engineer         | [guides/security-engineer.md](guides/security-engineer.md)                 | [agents/security-engineer.agent.md](agents/security-engineer.agent.md)                 |
 | Site Reliability Engineer | [guides/site-reliability-engineer.md](guides/site-reliability-engineer.md) | [agents/site-reliability-engineer.agent.md](agents/site-reliability-engineer.agent.md) |
+| Terms of Service Expert   | [guides/terms-of-service-expert.md](guides/terms-of-service-expert.md)     | [agents/terms-of-service-expert.agent.md](agents/terms-of-service-expert.agent.md)     |
 | Terraform Specialist      | [guides/terraform-specialist.md](guides/terraform-specialist.md)           | [agents/terraform-specialist.agent.md](agents/terraform-specialist.agent.md)           |
 | Technical Educator        | [guides/technical-educator.md](guides/technical-educator.md)               | [agents/technical-educator.agent.md](agents/technical-educator.agent.md)               |
 | Technical Writer          | [guides/technical-writer.md](guides/technical-writer.md)                   | [agents/technical-writer.agent.md](agents/technical-writer.agent.md)                   |

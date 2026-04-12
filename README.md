@@ -45,7 +45,7 @@ After installing Gemini CLI skills, run `/skills reload` if Gemini CLI is alread
 
 ## Current Agents
 
-The repository includes thirteen agents:
+The repository includes fourteen agents:
 
 | Role                      | Masterclass guide                                                          | Agent                                                                                  |
 | ------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
@@ -56,6 +56,7 @@ The repository includes thirteen agents:
 | LlamaIndex Specialist     | [guides/llamaindex-workflows.md](guides/llamaindex-workflows.md)           | [agents/llamaindex-specialist.agent.md](agents/llamaindex-specialist.agent.md)         |
 | Product Manager           | [guides/product-manager.md](guides/product-manager.md)                     | [agents/product-manager.agent.md](agents/product-manager.agent.md)                     |
 | Prompt Engineer           | [guides/prompt-engineer.md](guides/prompt-engineer.md)                     | [agents/prompt-engineer.agent.md](agents/prompt-engineer.agent.md)                     |
+| Privacy Policy Expert     | [guides/privacy-policy-expert.md](guides/privacy-policy-expert.md)         | [agents/privacy-policy-expert.agent.md](agents/privacy-policy-expert.agent.md)         |
 | Security Engineer         | [guides/security-engineer.md](guides/security-engineer.md)                 | [agents/security-engineer.agent.md](agents/security-engineer.agent.md)                 |
 | Site Reliability Engineer | [guides/site-reliability-engineer.md](guides/site-reliability-engineer.md) | [agents/site-reliability-engineer.agent.md](agents/site-reliability-engineer.agent.md) |
 | Terraform Specialist      | [guides/terraform-specialist.md](guides/terraform-specialist.md)           | [agents/terraform-specialist.agent.md](agents/terraform-specialist.agent.md)           |

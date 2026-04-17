@@ -32,7 +32,7 @@ Each installer copies the included agents into the default folder for a specific
 | -------------- | ------------------------------------- | ------------------- |
 | GitHub Copilot | `./scripts/install-copilot-agents.sh` | `~/.copilot/agents` |
 | Claude Code    | `./scripts/install-claude-agents.sh`  | `~/.claude/agents`  |
-| Codex          | `./scripts/install-codex-agents.sh`   | `~/.codex/agents`   |
+| Codex          | `./scripts/install-codex-agents.sh`   | `~/.codex/skills`   |
 | Gemini CLI     | `./scripts/install-gemini-agents.sh`  | `~/.gemini/skills`  |
 
 If you want a different destination, pass it as the first argument:
@@ -40,6 +40,8 @@ If you want a different destination, pass it as the first argument:
 ```sh
 ./scripts/install-copilot-agents.sh /path/to/agents
 ```
+
+After installing Codex skills, restart Codex so it picks up the new `SKILL.md` files.
 
 After installing Gemini CLI skills, run `/skills reload` if Gemini CLI is already open.
 

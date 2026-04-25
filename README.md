@@ -60,7 +60,7 @@ After installing Gemini CLI skills, run `/skills reload` if Gemini CLI is alread
 
 ## Current Agents
 
-The repository includes twelve agents.
+The repository includes thirteen agents.
 
 | Role                      | Masterclass guide                                                          | Agent                                                                                  |
 | ------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
@@ -71,6 +71,7 @@ The repository includes twelve agents.
 | Product Manager           | [guides/product-manager.md](guides/product-manager.md)                     | [agents/product-manager.agent.md](agents/product-manager.agent.md)                     |
 | Prompt Engineer           | [guides/prompt-engineer.md](guides/prompt-engineer.md)                     | [agents/prompt-engineer.agent.md](agents/prompt-engineer.agent.md)                     |
 | Security Engineer         | [guides/security-engineer.md](guides/security-engineer.md)                 | [agents/security-engineer.agent.md](agents/security-engineer.agent.md)                 |
+| SEO Opportunity Analyst   | [guides/seo-opportunity-analysis.md](guides/seo-opportunity-analysis.md)   | [agents/seo-opportunity-analyst.agent.md](agents/seo-opportunity-analyst.agent.md)     |
 | Site Reliability Engineer | [guides/site-reliability-engineer.md](guides/site-reliability-engineer.md) | [agents/site-reliability-engineer.agent.md](agents/site-reliability-engineer.agent.md) |
 | Terraform Specialist      | [guides/terraform-specialist.md](guides/terraform-specialist.md)           | [agents/terraform-specialist.agent.md](agents/terraform-specialist.agent.md)           |
 | Technical Educator        | [guides/technical-educator.md](guides/technical-educator.md)               | [agents/technical-educator.agent.md](agents/technical-educator.agent.md)               |
@@ -81,14 +82,14 @@ The repository includes twelve agents.
 
 The repository includes six skills. Each lives under `skills/<name>/SKILL.md` so it can be dropped directly into a tool's skills directory.
 
-| Skill                | Masterclass guide                                                  | Skill                                                          |
-| -------------------- | ------------------------------------------------------------------ | -------------------------------------------------------------- |
-| Cookie Policy        | [guides/cookie-policy-expert.md](guides/cookie-policy-expert.md)   | [skills/cookie-policy/SKILL.md](skills/cookie-policy/SKILL.md) |
-| HTML Email Templates | [guides/html-email-templates.md](guides/html-email-templates.md)   | [skills/html-email-templates/SKILL.md](skills/html-email-templates/SKILL.md) |
-| LinkedIn Post        | [guides/linkedin-writer.md](guides/linkedin-writer.md)             | [skills/linkedin-post/SKILL.md](skills/linkedin-post/SKILL.md) |
-| Privacy Policy       | [guides/privacy-policy-expert.md](guides/privacy-policy-expert.md) | [skills/privacy-policy/SKILL.md](skills/privacy-policy/SKILL.md) |
-| Terms of Service     | [guides/terms-of-service-expert.md](guides/terms-of-service-expert.md) | [skills/terms-of-service/SKILL.md](skills/terms-of-service/SKILL.md) |
-| Travel Planner       | [guides/travel-planner.md](guides/travel-planner.md)               | [skills/travel-planner/SKILL.md](skills/travel-planner/SKILL.md) |
+| Skill                | Masterclass guide                                                      | Skill                                                                        |
+| -------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Cookie Policy        | [guides/cookie-policy-expert.md](guides/cookie-policy-expert.md)       | [skills/cookie-policy/SKILL.md](skills/cookie-policy/SKILL.md)               |
+| HTML Email Templates | [guides/html-email-templates.md](guides/html-email-templates.md)       | [skills/html-email-templates/SKILL.md](skills/html-email-templates/SKILL.md) |
+| LinkedIn Post        | [guides/linkedin-writer.md](guides/linkedin-writer.md)                 | [skills/linkedin-post/SKILL.md](skills/linkedin-post/SKILL.md)               |
+| Privacy Policy       | [guides/privacy-policy-expert.md](guides/privacy-policy-expert.md)     | [skills/privacy-policy/SKILL.md](skills/privacy-policy/SKILL.md)             |
+| Terms of Service     | [guides/terms-of-service-expert.md](guides/terms-of-service-expert.md) | [skills/terms-of-service/SKILL.md](skills/terms-of-service/SKILL.md)         |
+| Travel Planner       | [guides/travel-planner.md](guides/travel-planner.md)                   | [skills/travel-planner/SKILL.md](skills/travel-planner/SKILL.md)             |
 
 ## Create a New Agent or Skill
 

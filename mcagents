@@ -1,0 +1,122 @@
+#!/bin/sh
+# Bootstrap wrapper for the mcagents CLI.
+#
+# Resolution order:
+#   1. cli/bin/<os>-<arch>/mcagents   (cached binary, gitignored)
+#   2. download the matching binary from the latest GitHub Release
+#   3. fall back to `go run ./cli/cmd/mcagents` if Go is on PATH
+#
+# After downloading, the binary is cached under cli/bin/ and reused.
+
+set -eu
+
+REPO_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+BIN_DIR="$REPO_ROOT/cli/bin"
+
+GH_REPO="${MCAGENTS_GH_REPO:-maltehedderich/master-class-agents}"
+
+uname_os() {
+  case "$(uname -s)" in
+    Darwin) echo darwin ;;
+    Linux)  echo linux ;;
+    MINGW*|MSYS*|CYGWIN*) echo windows ;;
+    *) echo unsupported ;;
+  esac
+}
+
+uname_arch() {
+  case "$(uname -m)" in
+    x86_64|amd64) echo amd64 ;;
+    arm64|aarch64) echo arm64 ;;
+    *) echo unsupported ;;
+  esac
+}
+
+OS=$(uname_os)
+ARCH=$(uname_arch)
+PLATFORM_DIR="$BIN_DIR/${OS}-${ARCH}"
+BIN_NAME=mcagents
+[ "$OS" = "windows" ] && BIN_NAME=mcagents.exe
+BIN_PATH="$PLATFORM_DIR/$BIN_NAME"
+
+cached_bin_works() {
+  [ -x "$BIN_PATH" ]
+}
+
+download_release() {
+  if [ "$OS" = "unsupported" ] || [ "$ARCH" = "unsupported" ]; then
+    return 1
+  fi
+  if ! command -v curl >/dev/null 2>&1 && ! command -v wget >/dev/null 2>&1; then
+    return 1
+  fi
+
+  archive_ext=tar.gz
+  [ "$OS" = "windows" ] && archive_ext=zip
+  archive_name="mcagents_${OS}_${ARCH}.${archive_ext}"
+  url="https://github.com/${GH_REPO}/releases/latest/download/${archive_name}"
+
+  tmp=$(mktemp -d)
+  trap 'rm -rf "$tmp"' EXIT
+
+  if command -v curl >/dev/null 2>&1; then
+    if ! curl -fsSL "$url" -o "$tmp/$archive_name" 2>/dev/null; then
+      return 1
+    fi
+  else
+    if ! wget -q "$url" -O "$tmp/$archive_name" 2>/dev/null; then
+      return 1
+    fi
+  fi
+  printf 'Downloaded mcagents from %s\n' "$url" >&2
+
+  if [ "$archive_ext" = "tar.gz" ]; then
+    tar -xzf "$tmp/$archive_name" -C "$tmp" || return 1
+  else
+    if command -v unzip >/dev/null 2>&1; then
+      unzip -q "$tmp/$archive_name" -d "$tmp" || return 1
+    else
+      return 1
+    fi
+  fi
+
+  mkdir -p "$PLATFORM_DIR"
+  cp "$tmp/$BIN_NAME" "$BIN_PATH"
+  chmod +x "$BIN_PATH"
+}
+
+run_with_go() {
+  if ! command -v go >/dev/null 2>&1; then
+    return 1
+  fi
+  # Build into a cached path so the user's cwd is preserved when we exec.
+  cache="$BIN_DIR/dev/$BIN_NAME"
+  mkdir -p "$BIN_DIR/dev"
+  if ! (cd "$REPO_ROOT/cli" && go build -o "$cache" ./cmd/mcagents); then
+    return 1
+  fi
+  exec "$cache" "$@"
+}
+
+if cached_bin_works; then
+  exec "$BIN_PATH" "$@"
+fi
+
+if download_release; then
+  exec "$BIN_PATH" "$@"
+fi
+
+if run_with_go "$@"; then
+  :
+fi
+
+cat >&2 <<EOF
+mcagents: cannot find or build the CLI.
+Tried:
+  - cached binary at $BIN_PATH
+  - downloading the latest release from https://github.com/$GH_REPO/releases
+  - running 'go run ./cli/cmd/mcagents' (requires Go on PATH)
+
+Install Go (https://go.dev/dl) or grab a prebuilt binary from the releases page.
+EOF
+exit 1

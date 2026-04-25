@@ -23,36 +23,49 @@ The guides, agents, and skills in this repository are independent syntheses of i
 
 Any third-party names, product names, and trademarks mentioned in this repository belong to their respective owners and are used only for identification and commentary.
 
-## Install an Agent
+## Install Agents and Skills
 
-If you want to use the included agents, clone the repository and run the installer for your tool:
+If you want to use the included agents and skills, clone the repository and run `./mcagents`:
 
 ```sh
 git clone https://github.com/maltehedderich/master-class-agents
 cd master-class-agents
-./scripts/install-copilot-agents.sh
+./mcagents install
 ```
 
-That command installs the GitHub Copilot agents into `~/.copilot/agents` by default.
+The first run downloads a prebuilt `mcagents` CLI for your platform (or falls back to `go run` if you already have Go installed). Without flags it opens an interactive picker so you can choose the target tool, the agents, and the skills you want to install.
 
-The installer scripts currently install everything under `agents/`. The `skills/` folder is installed manually — copy a skill folder (e.g. `skills/privacy-policy/`) into your tool's skills directory.
-
-## Choose an Installer
-
-Each installer copies the included agents into the default folder for a specific tool.
-
-| Tool           | Command                               | Default destination |
-| -------------- | ------------------------------------- | ------------------- |
-| GitHub Copilot | `./scripts/install-copilot-agents.sh` | `~/.copilot/agents` |
-| Claude Code    | `./scripts/install-claude-agents.sh`  | `~/.claude/agents`  |
-| Codex          | `./scripts/install-codex-agents.sh`   | `~/.codex/skills`   |
-| Gemini CLI     | `./scripts/install-gemini-agents.sh`  | `~/.gemini/skills`  |
-
-If you want a different destination, pass it as the first argument:
+To install non-interactively — handy for dotfiles, CI, or scripts:
 
 ```sh
-./scripts/install-copilot-agents.sh /path/to/agents
+./mcagents install --tool claude --agents all --skills all
 ```
+
+You can also install only a subset:
+
+```sh
+./mcagents install --tool copilot --agents backend-engineer,frontend-engineer
+./mcagents install --tool codex   --skills privacy-policy
+```
+
+Install paths:
+
+- **Repo bootstrap** — `./mcagents` (this is the recommended path).
+- **`go install`** — `go install github.com/maltehedderich/master-class-agents/cli/cmd/mcagents@latest`. You still need a clone (or `--repo PATH`) for the source content.
+- **GitHub Releases** — download a prebuilt binary directly from the [releases page](https://github.com/maltehedderich/master-class-agents/releases).
+
+Run `./mcagents list` to see every available agent and skill, or `./mcagents list --tool claude` to also see where each one would be installed.
+
+## Default Destinations
+
+| Tool           | Agents go to        | Skills go to        |
+| -------------- | ------------------- | ------------------- |
+| GitHub Copilot | `~/.copilot/agents` | `~/.copilot/skills` |
+| Claude Code    | `~/.claude/agents`  | `~/.claude/skills`  |
+| Codex          | `~/.codex/skills`   | `~/.codex/skills`   |
+| Gemini CLI     | `~/.gemini/skills`  | `~/.gemini/skills`  |
+
+Codex and Gemini CLI install agents as skills, so both kinds land under their `skills/` directory. Pass `--dest /custom/path` to override either destination.
 
 After installing Codex skills, restart Codex so it picks up the new `SKILL.md` files.
 
@@ -60,7 +73,7 @@ After installing Gemini CLI skills, run `/skills reload` if Gemini CLI is alread
 
 ## Current Agents
 
-The repository includes fifteen agents.
+The repository includes sixteen agents.
 
 | Role                      | Masterclass guide                                                          | Agent                                                                                  |
 | ------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
@@ -73,6 +86,7 @@ The repository includes fifteen agents.
 | Security Engineer         | [guides/security-engineer.md](guides/security-engineer.md)                 | [agents/security-engineer.agent.md](agents/security-engineer.agent.md)                 |
 | SEO Brief Architect       | [guides/seo-brief-architect.md](guides/seo-brief-architect.md)             | [agents/seo-brief-architect.agent.md](agents/seo-brief-architect.agent.md)             |
 | SEO Content Drafter       | [guides/seo-content-drafter.md](guides/seo-content-drafter.md)             | [agents/seo-content-drafter.agent.md](agents/seo-content-drafter.agent.md)             |
+| SEO Content Editor        | [guides/seo-content-editor.md](guides/seo-content-editor.md)               | [agents/seo-content-editor.agent.md](agents/seo-content-editor.agent.md)               |
 | SEO Opportunity Analyst   | [guides/seo-opportunity-analyst.md](guides/seo-opportunity-analyst.md)     | [agents/seo-opportunity-analyst.agent.md](agents/seo-opportunity-analyst.agent.md)     |
 | Site Reliability Engineer | [guides/site-reliability-engineer.md](guides/site-reliability-engineer.md) | [agents/site-reliability-engineer.agent.md](agents/site-reliability-engineer.agent.md) |
 | Terraform Specialist      | [guides/terraform-specialist.md](guides/terraform-specialist.md)           | [agents/terraform-specialist.agent.md](agents/terraform-specialist.agent.md)           |
@@ -141,12 +155,13 @@ That extra step matters. It keeps the artifacts grounded in durable practitioner
 ## Repository Structure
 
 ```text
-agents/   Persona-driven agent definitions
-skills/   Procedural skill definitions (one folder per skill, with SKILL.md)
-guides/   Source masterclass guides
-prompts/  Prompt templates used to generate the guides
-.github/  Workspace-scoped GitHub Copilot customizations
-scripts/  Installers for Copilot, Claude Code, Codex, Gemini
+agents/    Persona-driven agent definitions
+skills/    Procedural skill definitions (one folder per skill, with SKILL.md)
+guides/    Source masterclass guides
+prompts/   Prompt templates used to generate the guides
+.github/   Workspace-scoped GitHub Copilot customizations and CI workflows
+cli/       Source for the mcagents CLI (Go module)
+mcagents   Bootstrap shell wrapper that downloads or runs the CLI
 ```
 
 ## Add a New Agent or Skill

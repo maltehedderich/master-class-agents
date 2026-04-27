@@ -2,7 +2,6 @@ package cli
 
 import (
 	"bufio"
-	"fmt"
 	"io"
 	"strings"
 
@@ -28,7 +27,9 @@ func newInteractiveConflictHandler(stdin io.Reader, stdout io.Writer) func(path 
 		}
 
 		for {
-			fmt.Fprintf(stdout, "%s already exists with different content. [o]verwrite / [s]kip / [A]ll / [N]one / [d]iff / [q]uit? ", path)
+			if err := writef(stdout, "%s already exists with different content. [o]verwrite / [s]kip / [A]ll / [N]one / [d]iff / [q]uit? ", path); err != nil {
+				return fsutil.ActionAbort
+			}
 			line, err := reader.ReadString('\n')
 			if err != nil {
 				return fsutil.ActionAbort
@@ -46,19 +47,23 @@ func newInteractiveConflictHandler(stdin io.Reader, stdout io.Writer) func(path 
 				skipAll = true
 				return fsutil.ActionSkip
 			case "d", "diff":
-				printDiff(stdout, existing, incoming)
+				if err := printDiff(stdout, existing, incoming); err != nil {
+					return fsutil.ActionAbort
+				}
 				continue
 			case "q", "quit", "abort":
 				return fsutil.ActionAbort
 			default:
-				fmt.Fprintln(stdout, "  please pick one of o, s, A, N, d, q")
+				if err := writeLine(stdout, "  please pick one of o, s, A, N, d, q"); err != nil {
+					return fsutil.ActionAbort
+				}
 			}
 		}
 	}
 }
 
-func printDiff(w io.Writer, existing, incoming []byte) {
+func printDiff(w io.Writer, existing, incoming []byte) error {
 	dmp := diffmatchpatch.New()
 	diffs := dmp.DiffMain(string(existing), string(incoming), false)
-	fmt.Fprintln(w, dmp.DiffPrettyText(diffs))
+	return writeLine(w, dmp.DiffPrettyText(diffs))
 }

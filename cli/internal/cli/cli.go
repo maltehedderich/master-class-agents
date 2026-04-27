@@ -75,19 +75,19 @@ func Run(args []string, stdin io.Reader, stdout, stderr io.Writer) int {
 func classifyError(err error, stderr io.Writer) int {
 	var ue *usageError
 	if errors.As(err, &ue) {
-		fmt.Fprintln(stderr, "error:", ue.Error())
+		_, _ = fmt.Fprintln(stderr, "error:", ue.Error())
 		return exitInput
 	}
 	var af *artifactFailureError
 	if errors.As(err, &af) {
-		fmt.Fprintln(stderr, af.Error())
+		_, _ = fmt.Fprintln(stderr, af.Error())
 		return exitArtifactFailure
 	}
 	if errors.Is(err, fsutil.ErrAborted) {
-		fmt.Fprintln(stderr, "aborted")
+		_, _ = fmt.Fprintln(stderr, "aborted")
 		return exitInterrupted
 	}
-	fmt.Fprintln(stderr, "error:", err.Error())
+	_, _ = fmt.Fprintln(stderr, "error:", err.Error())
 	return exitEnvironment
 }
 

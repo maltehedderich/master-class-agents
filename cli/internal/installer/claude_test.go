@@ -30,6 +30,9 @@ Body
 	if strings.Contains(string(got), `name: "Backend Engineer"`) {
 		t.Errorf("original name was not rewritten; got:\n%s", got)
 	}
+	if strings.Contains(string(got), "tools:") {
+		t.Errorf("copilot tool aliases should be removed for Claude; got:\n%s", got)
+	}
 }
 
 func TestClaudeRewritesUnquotedName(t *testing.T) {
@@ -79,6 +82,7 @@ description: "Sample"
 tools:
   - read
   - edit
+model: inherit
 ---
 
 Body
@@ -90,8 +94,11 @@ Body
 	}
 	got, _ := os.ReadFile(filepath.Join(dest, "multi.agent.md"))
 	out := string(got)
-	if !strings.Contains(out, "  - read") || !strings.Contains(out, "  - edit") {
-		t.Errorf("multi-line tools list lost; got:\n%s", out)
+	if strings.Contains(out, "tools:") || strings.Contains(out, "  - read") || strings.Contains(out, "  - edit") {
+		t.Errorf("multi-line tools list should be removed; got:\n%s", out)
+	}
+	if !strings.Contains(out, "model: inherit") {
+		t.Errorf("following frontmatter keys should be preserved; got:\n%s", out)
 	}
 	if !strings.Contains(out, `name: "master-class-agents:multi"`) {
 		t.Errorf("missing rewritten name; got:\n%s", out)

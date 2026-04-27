@@ -131,22 +131,44 @@ func atomicWrite(dest string, content []byte) error {
 		return fmt.Errorf("open temp %s: %w", tmp, err)
 	}
 	if _, err := f.Write(content); err != nil {
-		f.Close()
-		os.Remove(tmp)
-		return fmt.Errorf("write temp %s: %w", tmp, err)
+		return errors.Join(
+			fmt.Errorf("write temp %s: %w", tmp, err),
+			closeTemp(f, tmp),
+			removeTemp(tmp),
+		)
 	}
 	if err := f.Sync(); err != nil {
-		f.Close()
-		os.Remove(tmp)
-		return fmt.Errorf("fsync temp %s: %w", tmp, err)
+		return errors.Join(
+			fmt.Errorf("fsync temp %s: %w", tmp, err),
+			closeTemp(f, tmp),
+			removeTemp(tmp),
+		)
 	}
 	if err := f.Close(); err != nil {
-		os.Remove(tmp)
-		return fmt.Errorf("close temp %s: %w", tmp, err)
+		return errors.Join(
+			fmt.Errorf("close temp %s: %w", tmp, err),
+			removeTemp(tmp),
+		)
 	}
 	if err := os.Rename(tmp, dest); err != nil {
-		os.Remove(tmp)
-		return fmt.Errorf("rename %s -> %s: %w", tmp, dest, err)
+		return errors.Join(
+			fmt.Errorf("rename %s -> %s: %w", tmp, dest, err),
+			removeTemp(tmp),
+		)
+	}
+	return nil
+}
+
+func closeTemp(f *os.File, path string) error {
+	if err := f.Close(); err != nil {
+		return fmt.Errorf("close temp %s: %w", path, err)
+	}
+	return nil
+}
+
+func removeTemp(path string) error {
+	if err := os.Remove(path); err != nil && !errors.Is(err, os.ErrNotExist) {
+		return fmt.Errorf("remove temp %s: %w", path, err)
 	}
 	return nil
 }

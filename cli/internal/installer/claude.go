@@ -29,7 +29,8 @@ func (*Claude) DefaultDir(kind Kind) string {
 }
 
 // InstallAgent rewrites the frontmatter `name:` to "master-class-agents:<a.Name>"
-// (inserting one if missing) and writes to destRoot/<name>.agent.md.
+// (inserting one if missing), removes Copilot-specific tool aliases, and writes
+// to destRoot/<name>.agent.md.
 func (*Claude) InstallAgent(a source.Agent, destRoot string, opts Options) (Result, error) {
 	raw, err := os.ReadFile(a.Path)
 	if err != nil {
@@ -49,7 +50,9 @@ func (*Claude) InstallSkill(s source.Skill, destRoot string, opts Options) (Resu
 }
 
 // rewriteClaudeName replaces the frontmatter `name:` line with the namespaced
-// form, or inserts one before the closing `---` if missing.
+// form, or inserts one before the closing `---` if missing. It also removes the
+// source `tools:` field because the repository uses Copilot tool aliases, while
+// Claude Code has its own tool names and safely inherits all tools when omitted.
 func rewriteClaudeName(raw []byte, agentName string) ([]byte, error) {
 	target := fmt.Sprintf("name: %q", "master-class-agents:"+agentName)
 
@@ -59,6 +62,7 @@ func rewriteClaudeName(raw []byte, agentName string) ([]byte, error) {
 	var out bytes.Buffer
 	state := 0 // 0=before fm, 1=in fm, 2=after fm
 	wroteName := false
+	skippingTools := false
 
 	for scanner.Scan() {
 		line := scanner.Text()
@@ -84,12 +88,22 @@ func rewriteClaudeName(raw []byte, agentName string) ([]byte, error) {
 				state = 2
 				continue
 			}
+			if skippingTools {
+				if isIndentedOrBlank(line) {
+					continue
+				}
+				skippingTools = false
+			}
 			if isTopLevelKey(line, "name") {
 				if !wroteName {
 					out.WriteString(target)
 					out.WriteByte('\n')
 					wroteName = true
 				}
+				continue
+			}
+			if isTopLevelKey(line, "tools") {
+				skippingTools = true
 				continue
 			}
 			out.WriteString(line)
@@ -132,4 +146,8 @@ func isTopLevelKey(line, key string) bool {
 		return next == ' ' || next == '\t'
 	}
 	return false
+}
+
+func isIndentedOrBlank(line string) bool {
+	return strings.HasPrefix(line, " ") || strings.HasPrefix(line, "\t") || strings.TrimSpace(line) == ""
 }

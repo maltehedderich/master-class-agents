@@ -13,15 +13,15 @@ import (
 )
 
 type installFlags struct {
-	tool       string
-	agentsCSV  string
-	skillsCSV  string
-	dest       string
-	force      bool
-	noClobber  bool
-	repo       string
-	dryRun     bool
-	verbose    bool
+	tool      string
+	agentsCSV string
+	skillsCSV string
+	dest      string
+	force     bool
+	noClobber bool
+	repo      string
+	dryRun    bool
+	verbose   bool
 }
 
 func newInstallCmd(stdin io.Reader, stdout, stderr io.Writer) *cobra.Command {
@@ -112,7 +112,9 @@ func runInstall(flags installFlags, stdin io.Reader, stdout, stderr io.Writer) e
 	}
 
 	if len(selectedAgents) == 0 && len(selectedSkills) == 0 {
-		fmt.Fprintln(stderr, "nothing selected, exiting")
+		if err := writeLine(stderr, "nothing selected, exiting"); err != nil {
+			return err
+		}
 		return nil
 	}
 
@@ -135,7 +137,9 @@ func runInstall(flags installFlags, stdin io.Reader, stdout, stderr io.Writer) e
 	}
 
 	if flags.dryRun {
-		fmt.Fprintln(stdout, "dry-run: planned writes")
+		if err := writeLine(stdout, "dry-run: planned writes"); err != nil {
+			return err
+		}
 	}
 
 	var totalRes installer.Result
@@ -145,30 +149,42 @@ func runInstall(flags installFlags, stdin io.Reader, stdout, stderr io.Writer) e
 		totalRes.Merge(res)
 		if err != nil {
 			failures = append(failures, fmt.Sprintf("agent %s: %v", a.Name, err))
-			fmt.Fprintf(stderr, "FAIL agent %s: %v\n", a.Name, err)
+			if err := writef(stderr, "FAIL agent %s: %v\n", a.Name, err); err != nil {
+				return err
+			}
 			continue
 		}
-		logActions(stdout, flags.verbose, flags.dryRun, "agent", a.Name, res)
+		if err := logActions(stdout, flags.verbose, flags.dryRun, "agent", a.Name, res); err != nil {
+			return err
+		}
 	}
 	for _, s := range selectedSkills {
 		res, err := inst.InstallSkill(s, skillDest, opts)
 		totalRes.Merge(res)
 		if err != nil {
 			failures = append(failures, fmt.Sprintf("skill %s: %v", s.Name, err))
-			fmt.Fprintf(stderr, "FAIL skill %s: %v\n", s.Name, err)
+			if err := writef(stderr, "FAIL skill %s: %v\n", s.Name, err); err != nil {
+				return err
+			}
 			continue
 		}
-		logActions(stdout, flags.verbose, flags.dryRun, "skill", s.Name, res)
+		if err := logActions(stdout, flags.verbose, flags.dryRun, "skill", s.Name, res); err != nil {
+			return err
+		}
 	}
 
 	verb := "Installed"
 	if flags.dryRun {
 		verb = "Would install"
 	}
-	fmt.Fprintf(stdout, "%s %d agent(s) and %d skill(s) into %q\n",
-		verb, len(selectedAgents), len(selectedSkills), inst.Name())
-	fmt.Fprintf(stdout, "  %d file(s) written, %d skipped\n",
-		len(totalRes.Written), len(totalRes.Skipped))
+	if err := writef(stdout, "%s %d agent(s) and %d skill(s) into %q\n",
+		verb, len(selectedAgents), len(selectedSkills), inst.Name()); err != nil {
+		return err
+	}
+	if err := writef(stdout, "  %d file(s) written, %d skipped\n",
+		len(totalRes.Written), len(totalRes.Skipped)); err != nil {
+		return err
+	}
 
 	if len(failures) > 0 {
 		return &artifactFailureError{
@@ -241,25 +257,29 @@ func splitCSV(csv string) []string {
 	return out
 }
 
-func logActions(w io.Writer, verbose, dryRun bool, kind, name string, res installer.Result) {
+func logActions(w io.Writer, verbose, dryRun bool, kind, name string, res installer.Result) error {
 	if !verbose && len(res.Written) <= 1 && len(res.Skipped) == 0 {
 		marker := "installed"
 		if dryRun {
 			marker = "would install"
 		}
-		fmt.Fprintf(w, "%s %s %s\n", marker, kind, name)
-		return
+		return writef(w, "%s %s %s\n", marker, kind, name)
 	}
 	for _, p := range res.Written {
 		marker := "wrote"
 		if dryRun {
 			marker = "would write"
 		}
-		fmt.Fprintf(w, "  %s %s\n", marker, p)
+		if err := writef(w, "  %s %s\n", marker, p); err != nil {
+			return err
+		}
 	}
 	for _, p := range res.Skipped {
-		fmt.Fprintf(w, "  skipped %s (already up to date)\n", p)
+		if err := writef(w, "  skipped %s (already up to date)\n", p); err != nil {
+			return err
+		}
 	}
+	return nil
 }
 
 func isTTY(r io.Reader) bool {

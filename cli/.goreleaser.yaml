@@ -29,12 +29,13 @@ builds:
 
 archives:
   - id: mcagents
-    builds:
+    ids:
       - mcagents
     name_template: "mcagents_{{ .Os }}_{{ .Arch }}"
     format_overrides:
       - goos: windows
-        format: zip
+        formats:
+          - zip
     files:
       - LICENSE*
       - README*

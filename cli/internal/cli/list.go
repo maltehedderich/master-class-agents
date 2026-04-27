@@ -2,7 +2,6 @@ package cli
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"path/filepath"
 	"text/tabwriter"
@@ -89,9 +88,13 @@ func runList(flags listFlags, stdout io.Writer) error {
 
 	tw := tabwriter.NewWriter(stdout, 0, 0, 2, ' ', 0)
 	if inst != nil {
-		fmt.Fprintln(tw, "NAME\tTYPE\tDESCRIPTION\tDEST")
+		if err := writeLine(tw, "NAME\tTYPE\tDESCRIPTION\tDEST"); err != nil {
+			return err
+		}
 	} else {
-		fmt.Fprintln(tw, "NAME\tTYPE\tDESCRIPTION")
+		if err := writeLine(tw, "NAME\tTYPE\tDESCRIPTION"); err != nil {
+			return err
+		}
 	}
 	for _, e := range entries {
 		desc := e.Description
@@ -99,9 +102,13 @@ func runList(flags listFlags, stdout io.Writer) error {
 			desc = desc[:77] + "..."
 		}
 		if inst != nil {
-			fmt.Fprintf(tw, "%s\t%s\t%s\t%s\n", e.Name, e.Type, desc, e.Dest)
+			if err := writef(tw, "%s\t%s\t%s\t%s\n", e.Name, e.Type, desc, e.Dest); err != nil {
+				return err
+			}
 		} else {
-			fmt.Fprintf(tw, "%s\t%s\t%s\n", e.Name, e.Type, desc)
+			if err := writef(tw, "%s\t%s\t%s\n", e.Name, e.Type, desc); err != nil {
+				return err
+			}
 		}
 	}
 	return tw.Flush()

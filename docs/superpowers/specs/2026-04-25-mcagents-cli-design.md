@@ -188,7 +188,7 @@ Each tool gets its own file (`claude.go`, `codex.go`, `copilot.go`, `gemini.go`)
 | Tool    | Agent transform                                                                                                                                        | Skill transform                                       |
 | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------- |
 | Copilot | Copy as-is to `<dest>/<name>.agent.md`                                                                                                                  | Copy `skills/<name>/` verbatim to `<dest>/<name>/`    |
-| Claude  | Rewrite frontmatter `name:` to `"master-class-agents:<name>"`; output to `<dest>/<name>.agent.md`                                                       | Copy `skills/<name>/` verbatim to `<dest>/<name>/`    |
+| Claude  | Rewrite frontmatter `name:` to `"master-class-agents:<name>"`; remove source `tools:` so Claude inherits all available tools; output to `<dest>/<name>.agent.md` | Copy `skills/<name>/` verbatim to `<dest>/<name>/`    |
 | Codex   | Strip the source frontmatter; emit a new frontmatter block with `name: "<name>"` and `description: "<description>"`; write to `<dest>/<name>/SKILL.md` | Copy `skills/<name>/` verbatim to `<dest>/<name>/`    |
 | Gemini  | Same as Codex                                                                                                                                          | Copy `skills/<name>/` verbatim to `<dest>/<name>/`    |
 

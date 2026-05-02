@@ -97,12 +97,13 @@ The repository includes seventeen agents.
 
 ## Current Skills
 
-The repository includes six skills. Each lives under `skills/<name>/SKILL.md` so it can be dropped directly into a tool's skills directory.
+The repository includes seven skills. Each lives under `skills/<name>/SKILL.md` so it can be dropped directly into a tool's skills directory.
 
 | Skill                | Masterclass guide                                                      | Skill                                                                        |
 | -------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
 | Cookie Policy        | [guides/cookie-policy-expert.md](guides/cookie-policy-expert.md)       | [skills/cookie-policy/SKILL.md](skills/cookie-policy/SKILL.md)               |
 | HTML Email Templates | [guides/html-email-templates.md](guides/html-email-templates.md)       | [skills/html-email-templates/SKILL.md](skills/html-email-templates/SKILL.md) |
+| Idiomatic Go         | [guides/go-language.md](guides/go-language.md)                         | [skills/idiomatic-go/SKILL.md](skills/idiomatic-go/SKILL.md)                 |
 | LinkedIn Post        | [guides/linkedin-writer.md](guides/linkedin-writer.md)                 | [skills/linkedin-post/SKILL.md](skills/linkedin-post/SKILL.md)               |
 | Privacy Policy       | [guides/privacy-policy-expert.md](guides/privacy-policy-expert.md)     | [skills/privacy-policy/SKILL.md](skills/privacy-policy/SKILL.md)             |
 | Terms of Service     | [guides/terms-of-service-expert.md](guides/terms-of-service-expert.md) | [skills/terms-of-service/SKILL.md](skills/terms-of-service/SKILL.md)         |

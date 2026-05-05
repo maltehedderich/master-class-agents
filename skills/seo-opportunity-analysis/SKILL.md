@@ -1,6 +1,6 @@
 ---
 name: seo-opportunity-analysis
-description: "Analyze a product spec to find SEO content opportunities. Use when interpreting a product or company spec, deriving audience search behavior, mapping topical territory, proposing pillar and cluster strategy, prioritizing topics by demand x winnability x business value, choosing the first SEO piece to publish, and analyzing the live SERP for the target query with the SEO Opportunity Analyst workflow."
+description: "Analyze a product spec to find SEO content opportunities. Use when interpreting a product or company spec, deriving audience search behavior, mapping topical territory, proposing pillar and cluster strategy, prioritizing topics by demand x winnability x business value, choosing the first SEO piece to publish, analyzing the live SERP with the SEO Opportunity Analyst agent, and saving the report as Markdown in docs/."
 argument-hint: "Product spec or repo path, optional keyword data source, and any known audience or GTM constraints"
 ---
 
@@ -8,11 +8,18 @@ argument-hint: "Product spec or repo path, optional keyword data source, and any
 
 ## What This Skill Does
 
-This skill turns a product spec into an implementable SEO opportunity report.
+This skill turns a product spec into an implementable SEO opportunity report saved as a Markdown file under `docs/`.
 
 It uses the `SEO Opportunity Analyst` workflow as the core reasoning model: start from the audience job, derive search behavior from the spec, map a compact topical territory, prioritize by demand x winnability x business value, and validate the chosen opening move against the live SERP.
 
 Use this skill for opportunity analysis and territory design. Do not use it to draft briefs, outlines, or articles.
+
+The standard deliverable is a workspace artifact, not just a chat answer:
+
+- spawn the installed `seo-opportunity-analyst` subagent, displayed as `SEO Opportunity Analyst`
+- synthesize or verify its findings
+- write the final analysis to `docs/seo-opportunity-analysis-<slug>.md`
+- reply with the file path and a short summary
 
 ## When to Use
 
@@ -46,13 +53,15 @@ Helpful but optional:
 
 ## Non-Negotiable Constraints
 
-1. Start from the audience job, not a keyword dump.
-2. Treat the live SERP as the brief for intent, format, depth, and publisher expectations.
-3. Keep the territory compact and defensible. Favor 1-3 pillars the founder can realistically cover.
-4. Default to a cluster-first first move with a high-intent query unless the spec clearly supports a pillar-first authority play.
-5. Do not recommend a topic if the site cannot credibly satisfy the real search intent.
-6. Do not drift into content production deliverables.
-7. Do not invent keyword metrics. If no data source exists, use qualitative prioritization from SERP evidence.
+1. Spawn the installed `seo-opportunity-analyst` subagent for the core opportunity analysis whenever subagents are available. Do not rely on a filesystem path for the agent definition; installed paths can vary. Only fall back to doing the analysis directly if spawning is unavailable.
+2. Store the final analysis as a Markdown file in `docs/`. Do not leave the report only in chat.
+3. Start from the audience job, not a keyword dump.
+4. Treat the live SERP as the brief for intent, format, depth, and publisher expectations.
+5. Keep the territory compact and defensible. Favor 1-3 pillars the founder can realistically cover.
+6. Default to a cluster-first first move with a high-intent query unless the spec clearly supports a pillar-first authority play.
+7. Do not recommend a topic if the site cannot credibly satisfy the real search intent.
+8. Do not drift into content production deliverables.
+9. Do not invent keyword metrics. If no data source exists, use qualitative prioritization from SERP evidence.
 
 ## Procedure
 
@@ -77,9 +86,9 @@ Ask once whether the user has a preferred source for keyword volume or difficult
 
 Do not block the workflow on paid keyword tools.
 
-### Step 3 — Use the SEO Opportunity Analyst workflow
+### Step 3 — Spawn the SEO Opportunity Analyst agent
 
-Prefer invoking the `SEO Opportunity Analyst` custom agent for the core analysis when it is available in the environment.
+Spawn the installed custom agent named `seo-opportunity-analyst` for the core analysis. Its display name may be `SEO Opportunity Analyst`. Do not assume a specific local file path for the agent definition; installed agent paths can vary by environment.
 
 Pass it:
 
@@ -88,8 +97,11 @@ Pass it:
 - the out-of-scope tasks
 - whether keyword metrics are available
 - the required output sections
+- the requirement that findings will be written to a Markdown report in `docs/`
 
-If the custom agent is not available, mirror its method directly instead of widening scope: interpret the spec, derive search behavior, map territory, prioritize opportunities, choose the first move, and validate it against the SERP.
+Ask the agent for a concise, structured opportunity analysis that covers the report sections below. After it returns, synthesize or verify the findings before writing the final report.
+
+If the custom agent is not available, state the fallback explicitly in the report and mirror its method directly instead of widening scope: interpret the spec, derive search behavior, map territory, prioritize opportunities, choose the first move, and validate it against the SERP.
 
 ### Step 4 — Derive audience search behavior
 
@@ -192,9 +204,15 @@ Examples:
 
 For new or low-authority sites, treat this as load-bearing rather than decorative.
 
-### Step 10 — Produce the Opportunity Report
+### Step 10 — Write the Opportunity Report to `docs/`
 
-Return the report in this order:
+Create `docs/` if it does not exist. Save the report as:
+
+`docs/seo-opportunity-analysis-<product-or-query-slug>.md`
+
+Use a short, lowercase, hyphenated slug from the product name, spec name, or chosen target query. If the file already exists, append a numeric suffix rather than overwriting unrelated work.
+
+Write the Markdown report in this order:
 
 1. Opportunity thesis — one short paragraph.
 2. Audience search-context summary — 5-10 likely queries across funnel stages.
@@ -204,6 +222,8 @@ Return the report in this order:
 6. Standard SERP block for the first piece's target query.
 7. E-E-A-T angle.
 8. Assumptions, risks, and missing inputs.
+
+After writing the file, reply with the report path and a short summary of the recommendation. Do not paste the whole report into chat unless the user asks for it.
 
 ## Quality Checks
 
@@ -243,4 +263,4 @@ Use this skill with:
 
 Typical prompt:
 
-`Use seo-opportunity-analysis on this product spec. Prioritize a compact cluster strategy, recommend the first piece, and include a live SERP read for the target query.`
+`Use seo-opportunity-analysis on this product spec. Spawn the SEO Opportunity Analyst agent, prioritize a compact cluster strategy, recommend the first piece, include a live SERP read for the target query, and save the report in docs/.`

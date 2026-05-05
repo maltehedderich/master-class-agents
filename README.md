@@ -62,12 +62,12 @@ Run `./mcagents list` to see every available agent and skill, or `./mcagents lis
 | -------------- | ------------------- | ------------------- |
 | GitHub Copilot | `~/.copilot/agents` | `~/.copilot/skills` |
 | Claude Code    | `~/.claude/agents`  | `~/.claude/skills`  |
-| Codex          | `~/.codex/skills`   | `~/.codex/skills`   |
+| Codex          | `~/.codex/agents`   | `~/.codex/skills`   |
 | Gemini CLI     | `~/.gemini/skills`  | `~/.gemini/skills`  |
 
-Codex and Gemini CLI install agents as skills, so both kinds land under their `skills/` directory. Pass `--dest /custom/path` to override either destination.
+Codex installs agents as native custom-agent TOML files and skills as `SKILL.md` folders. Gemini CLI installs agents as skills, so both Gemini kinds land under its `skills/` directory. Pass `--dest /custom/path` to override either destination.
 
-After installing Codex skills, restart Codex so it picks up the new `SKILL.md` files.
+After installing Codex agents or skills, restart Codex so it picks up the new files.
 
 After installing Gemini CLI skills, run `/skills reload` if Gemini CLI is already open.
 

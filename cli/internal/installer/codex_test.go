@@ -9,7 +9,7 @@ import (
 	"github.com/maltehedderich/master-class-agents/cli/internal/source"
 )
 
-func TestCodexInstallAgentWritesSkillFolder(t *testing.T) {
+func TestCodexInstallAgentWritesNativeAgentFile(t *testing.T) {
 	agent := source.Agent{
 		Name:        "backend-engineer",
 		Description: "Use when: doing backend things",
@@ -23,7 +23,7 @@ func TestCodexInstallAgentWritesSkillFolder(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	want := filepath.Join(dest, "backend-engineer", "SKILL.md")
+	want := filepath.Join(dest, "backend-engineer.toml")
 	if !contains(res.Written, want) {
 		t.Errorf("Written = %v, missing %s", res.Written, want)
 	}
@@ -32,27 +32,27 @@ func TestCodexInstallAgentWritesSkillFolder(t *testing.T) {
 		t.Fatal(err)
 	}
 	out := string(got)
-	if !strings.HasPrefix(out, "---\n") {
-		t.Errorf("expected leading frontmatter delimiter; got:\n%s", out)
+	if !strings.Contains(out, `name = "backend-engineer"`) {
+		t.Errorf("missing native agent name; got:\n%s", out)
 	}
-	if !strings.Contains(out, `name: "backend-engineer"`) {
-		t.Errorf("missing name in frontmatter; got:\n%s", out)
-	}
-	if !strings.Contains(out, `description: "Use when: doing backend things"`) {
-		t.Errorf("description not preserved verbatim; got:\n%s", out)
+	if !strings.Contains(out, `description = "Use when: doing backend things"`) {
+		t.Errorf("description not preserved as TOML; got:\n%s", out)
 	}
 	if !strings.Contains(out, "You are a backend engineer.") {
 		t.Errorf("body not preserved; got:\n%s", out)
 	}
-	if strings.Contains(out, `name: "Backend"`) {
+	if !strings.Contains(out, "developer_instructions = '''\nYou are a backend engineer.") {
+		t.Errorf("developer instructions not emitted as native field; got:\n%s", out)
+	}
+	if strings.Contains(out, `name: "Backend"`) || strings.Contains(out, "---") {
 		t.Errorf("original name leaked through; got:\n%s", out)
 	}
 }
 
-func TestCodexEscapesQuotesInDescription(t *testing.T) {
+func TestCodexEscapesTomlStrings(t *testing.T) {
 	agent := source.Agent{
 		Name:        "thing",
-		Description: `Use "quoted" carefully`,
+		Description: `Use "quoted" \ carefully`,
 		Body:        "body\n",
 		Frontmatter: map[string]string{},
 	}
@@ -61,13 +61,30 @@ func TestCodexEscapesQuotesInDescription(t *testing.T) {
 	if _, err := inst.InstallAgent(agent, dest, Options{}); err != nil {
 		t.Fatal(err)
 	}
-	got, _ := os.ReadFile(filepath.Join(dest, "thing", "SKILL.md"))
-	if !strings.Contains(string(got), `description: "Use \"quoted\" carefully"`) {
-		t.Errorf("quotes not escaped; got:\n%s", got)
+	got, _ := os.ReadFile(filepath.Join(dest, "thing.toml"))
+	if !strings.Contains(string(got), `description = "Use \"quoted\" \\ carefully"`) {
+		t.Errorf("TOML string not escaped; got:\n%s", got)
 	}
 }
 
-func TestCodexRejectsBadSkillName(t *testing.T) {
+func TestCodexUsesBasicStringWhenInstructionsContainLiteralDelimiter(t *testing.T) {
+	agent := source.Agent{
+		Name:        "thing",
+		Description: "desc",
+		Body:        "before ''' after\n",
+	}
+	dest := t.TempDir()
+	inst := &Codex{}
+	if _, err := inst.InstallAgent(agent, dest, Options{}); err != nil {
+		t.Fatal(err)
+	}
+	got, _ := os.ReadFile(filepath.Join(dest, "thing.toml"))
+	if !strings.Contains(string(got), `developer_instructions = "before ''' after\n"`) {
+		t.Errorf("instructions with literal delimiter should use TOML basic string; got:\n%s", got)
+	}
+}
+
+func TestCodexRejectsBadAgentName(t *testing.T) {
 	agent := source.Agent{
 		Name:        "Has Spaces",
 		Description: "x",
@@ -76,7 +93,7 @@ func TestCodexRejectsBadSkillName(t *testing.T) {
 	dest := t.TempDir()
 	inst := &Codex{}
 	if _, err := inst.InstallAgent(agent, dest, Options{}); err == nil {
-		t.Fatal("expected error on bad skill name")
+		t.Fatal("expected error on bad agent name")
 	}
 }
 
@@ -97,7 +114,7 @@ func TestCodexInstallSkillCopiesVerbatim(t *testing.T) {
 	}
 }
 
-func TestGeminiBehavesLikeCodex(t *testing.T) {
+func TestGeminiInstallAgentWritesSkillFolder(t *testing.T) {
 	agent := source.Agent{
 		Name:        "foo",
 		Description: "desc",

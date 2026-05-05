@@ -103,9 +103,9 @@ master-class-agents/
     internal/installer/
       installer.go                       Installer interface + Registry
       claude.go                          Rewrites name frontmatter
-      codex.go                           Wraps body in SKILL.md folder
+      codex.go                           Converts agents to native Codex TOML files
       copilot.go                         Copies as-is
-      gemini.go                          Same shape as Codex
+      gemini.go                          Wraps body in SKILL.md folder
     internal/fsutil/
       write.go                           Atomic write + conflict resolution
   .github/workflows/
@@ -173,7 +173,7 @@ type Result struct {
 
 type Installer interface {
     Name() string                       // "claude", "codex", "copilot", "gemini"
-    DefaultDir(kind Kind) string        // ~/.claude/agents, ~/.codex/skills, etc.
+    DefaultDir(kind Kind) string        // ~/.claude/agents, ~/.codex/agents, etc.
     InstallAgent(a source.Agent, destRoot string, opts Options) (Result, error)
     InstallSkill(s source.Skill, destRoot string, opts Options) (Result, error)
 }
@@ -189,8 +189,8 @@ Each tool gets its own file (`claude.go`, `codex.go`, `copilot.go`, `gemini.go`)
 | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------- |
 | Copilot | Copy as-is to `<dest>/<name>.agent.md`                                                                                                                  | Copy `skills/<name>/` verbatim to `<dest>/<name>/`    |
 | Claude  | Rewrite frontmatter `name:` to `"master-class-agents:<name>"`; remove source `tools:` so Claude inherits all available tools; output to `<dest>/<name>.agent.md` | Copy `skills/<name>/` verbatim to `<dest>/<name>/`    |
-| Codex   | Strip the source frontmatter; emit a new frontmatter block with `name: "<name>"` and `description: "<description>"`; write to `<dest>/<name>/SKILL.md` | Copy `skills/<name>/` verbatim to `<dest>/<name>/`    |
-| Gemini  | Same as Codex                                                                                                                                          | Copy `skills/<name>/` verbatim to `<dest>/<name>/`    |
+| Codex   | Strip the source frontmatter; emit native custom-agent TOML with `name`, `description`, and `developer_instructions`; write to `<dest>/<name>.toml` | Copy `skills/<name>/` verbatim to `<dest>/<name>/`    |
+| Gemini  | Strip the source frontmatter; emit a new frontmatter block with `name: "<name>"` and `description: "<description>"`; write to `<dest>/<name>/SKILL.md` | Copy `skills/<name>/` verbatim to `<dest>/<name>/`    |
 
 Default destinations:
 
@@ -198,10 +198,10 @@ Default destinations:
 | ------- | -------------------- | -------------------- |
 | Copilot | `~/.copilot/agents`  | `~/.copilot/skills`  |
 | Claude  | `~/.claude/agents`   | `~/.claude/skills`   |
-| Codex   | `~/.codex/skills`    | `~/.codex/skills`    |
+| Codex   | `~/.codex/agents`    | `~/.codex/skills`    |
 | Gemini  | `~/.gemini/skills`   | `~/.gemini/skills`   |
 
-(Codex and Gemini install agents-as-skills, so both kinds land under their `skills/` directory. Matches today's scripts. All defaults are overridable via `--dest`.)
+(Codex installs native custom agents. Gemini installs agents-as-skills, so both Gemini kinds land under its `skills/` directory. All defaults are overridable via `--dest`.)
 
 ### `internal/fsutil`
 
@@ -265,7 +265,8 @@ Verbose logging is opt-in (`-v`); default output is one line per artifact plus a
 One file per installer. Each runs against `t.TempDir()` and asserts exact file contents.
 
 - `claude_test.go`: name rewrite covers `name: foo`, `name: "foo"`, missing `name`, multi-line frontmatter.
-- `codex_test.go` / `gemini_test.go`: body extraction strips original frontmatter and rewraps; rejects skill names outside `[a-z0-9-]`.
+- `codex_test.go`: body extraction strips original frontmatter and emits native custom-agent TOML; rejects agent names outside `[a-z0-9-]`.
+- `gemini_test.go`: body extraction strips original frontmatter and rewraps; rejects skill names outside `[a-z0-9-]`.
 - `copilot_test.go`: byte-for-byte copy.
 
 ### Source-loader tests — `internal/source/*_test.go`

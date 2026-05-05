@@ -33,6 +33,18 @@ func TestListWithToolShowsDest(t *testing.T) {
 	}
 }
 
+func TestListCodexShowsNativeAgentDest(t *testing.T) {
+	repo := fixtureRepo(t)
+
+	code, out, _ := runCLI(t, "list", "--tool", "codex", "--repo", repo)
+	if code != 0 {
+		t.Fatalf("exit = %d", code)
+	}
+	if !strings.Contains(out, ".codex/agents") || !strings.Contains(out, "sample-agent.toml") {
+		t.Errorf("expected Codex agent destination to use native agents dir; got:\n%s", out)
+	}
+}
+
 func TestListJSON(t *testing.T) {
 	repo := fixtureRepo(t)
 

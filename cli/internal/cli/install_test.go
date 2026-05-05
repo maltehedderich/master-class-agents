@@ -97,7 +97,7 @@ func TestInstallClaudeRewritesName(t *testing.T) {
 	}
 }
 
-func TestInstallCodexAgentEmitsSkillFolder(t *testing.T) {
+func TestInstallCodexAgentEmitsNativeAgentFile(t *testing.T) {
 	repo := fixtureRepo(t)
 	dest := t.TempDir()
 
@@ -111,9 +111,9 @@ func TestInstallCodexAgentEmitsSkillFolder(t *testing.T) {
 	if code != 0 {
 		t.Fatalf("exit = %d", code)
 	}
-	target := filepath.Join(dest, "sample-agent", "SKILL.md")
+	target := filepath.Join(dest, "sample-agent.toml")
 	if _, err := os.Stat(target); err != nil {
-		t.Fatalf("missing skill folder: %v", err)
+		t.Fatalf("missing native Codex agent file: %v", err)
 	}
 }
 

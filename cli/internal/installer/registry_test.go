@@ -46,7 +46,7 @@ func TestDefaultDirsUseHome(t *testing.T) {
 		{"claude", "skill", filepath.FromSlash("/tmp/fake-home/.claude/skills")},
 		{"copilot", "agent", filepath.FromSlash("/tmp/fake-home/.copilot/agents")},
 		{"copilot", "skill", filepath.FromSlash("/tmp/fake-home/.copilot/skills")},
-		{"codex", "agent", filepath.FromSlash("/tmp/fake-home/.codex/skills")},
+		{"codex", "agent", filepath.FromSlash("/tmp/fake-home/.codex/agents")},
 		{"codex", "skill", filepath.FromSlash("/tmp/fake-home/.codex/skills")},
 		{"gemini", "agent", filepath.FromSlash("/tmp/fake-home/.gemini/skills")},
 		{"gemini", "skill", filepath.FromSlash("/tmp/fake-home/.gemini/skills")},

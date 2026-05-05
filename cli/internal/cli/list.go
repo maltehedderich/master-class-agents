@@ -68,7 +68,7 @@ func runList(flags listFlags, stdout io.Writer) error {
 	for _, a := range agents {
 		e := listEntry{Name: a.Name, Type: "agent", Description: a.Description}
 		if inst != nil {
-			e.Dest = filepath.Join(inst.DefaultDir(installer.KindAgent), a.Name+".agent.md")
+			e.Dest = agentDest(inst, a)
 		}
 		entries = append(entries, e)
 	}
@@ -112,4 +112,16 @@ func runList(flags listFlags, stdout io.Writer) error {
 		}
 	}
 	return tw.Flush()
+}
+
+func agentDest(inst installer.Installer, a source.Agent) string {
+	root := inst.DefaultDir(installer.KindAgent)
+	switch inst.Name() {
+	case "codex":
+		return filepath.Join(root, a.Name+".toml")
+	case "gemini":
+		return filepath.Join(root, a.Name, "SKILL.md")
+	default:
+		return filepath.Join(root, a.Name+".agent.md")
+	}
 }

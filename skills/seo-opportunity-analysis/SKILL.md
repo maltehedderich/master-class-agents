@@ -208,7 +208,7 @@ For new or low-authority sites, treat this as load-bearing rather than decorativ
 
 Create `docs/` if it does not exist. Save the report as:
 
-`docs/seo-opportunity-analysis-<product-or-query-slug>.md`
+`docs/seo-opportunity-analysis.md`
 
 Use a short, lowercase, hyphenated slug from the product name, spec name, or chosen target query. If the file already exists, append a numeric suffix rather than overwriting unrelated work.
 

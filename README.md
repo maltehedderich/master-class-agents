@@ -97,7 +97,7 @@ The repository includes seventeen agents.
 
 ## Current Skills
 
-The repository includes eight skills. Each lives under `skills/<name>/SKILL.md` so it can be dropped directly into a tool's skills directory.
+The repository includes ten skills. Each lives under `skills/<name>/SKILL.md` so it can be dropped directly into a tool's skills directory.
 
 | Skill                | Masterclass guide                                                          | Skill                                                                        |
 | -------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
@@ -107,6 +107,8 @@ The repository includes eight skills. Each lives under `skills/<name>/SKILL.md` 
 | Landing Page Copy    | [guides/landing-page-copywriter.md](guides/landing-page-copywriter.md)     | [skills/landing-page-copy/SKILL.md](skills/landing-page-copy/SKILL.md)       |
 | LinkedIn Post        | [guides/linkedin-writer.md](guides/linkedin-writer.md)                     | [skills/linkedin-post/SKILL.md](skills/linkedin-post/SKILL.md)               |
 | Privacy Policy       | [guides/privacy-policy-expert.md](guides/privacy-policy-expert.md)         | [skills/privacy-policy/SKILL.md](skills/privacy-policy/SKILL.md)             |
+| SEO Content Production | [guides/seo-brief-architect.md](guides/seo-brief-architect.md), [guides/seo-content-drafter.md](guides/seo-content-drafter.md), [guides/seo-content-editor.md](guides/seo-content-editor.md) | [skills/seo-content-production/SKILL.md](skills/seo-content-production/SKILL.md) |
+| SEO Opportunity Analysis | [guides/seo-opportunity-analyst.md](guides/seo-opportunity-analyst.md)   | [skills/seo-opportunity-analysis/SKILL.md](skills/seo-opportunity-analysis/SKILL.md) |
 | Terms of Service     | [guides/terms-of-service-expert.md](guides/terms-of-service-expert.md)     | [skills/terms-of-service/SKILL.md](skills/terms-of-service/SKILL.md)         |
 | Travel Planner       | [guides/travel-planner.md](guides/travel-planner.md)                       | [skills/travel-planner/SKILL.md](skills/travel-planner/SKILL.md)             |
 

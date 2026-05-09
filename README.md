@@ -2,20 +2,33 @@
 
 Custom AI agents and skills built from research-backed masterclass guides.
 
-This repository shares the agents and skills I use, and grows over time. Each one starts as a role-specific masterclass guide created with a research-capable LLM, then gets distilled into either a persona-driven **agent** or a procedural **skill**.
+This repository shares the agents and skills I use, and grows over time. Each one starts as a role-specific masterclass guide created with a research-capable LLM, then gets distilled into either an **agent** that owns a context window or a **skill** that supplies reusable guidance inside an agent's context.
 
 The repository also includes a workspace-scoped GitHub Copilot skill for generating new masterclass guides directly in chat.
 
 ## Agents vs Skills
 
-The same masterclass research can land in two different shapes. The choice depends on how the work is actually used.
+The same masterclass research can land in two different shapes. The choice is mostly about context, not whether the guidance sounds like a persona or a procedure.
 
-- **Agent** — a persona you delegate broad judgment to. The agent file describes a role, principles, and an approach the assistant embodies across many situations. Use this when the work spans design, review, debugging, and strategy in a single discipline.
-  - _Examples:_ Backend Engineer, Product Manager, UX Designer.
-- **Skill** — a procedural workflow that produces one type of artifact. The skill file describes a clear procedure, inputs, constraints, and a quality bar for a specific deliverable. Use this when the work is "given X, produce Y" with a repeatable structure.
-  - _Examples:_ Privacy Policy, Cookie Policy, Terms of Service, Travel Itinerary, LinkedIn Post, HTML Email Template.
+Claude Code's [subagent model](https://code.claude.com/docs/en/sub-agents) is the clearest reference: a subagent runs in its own context window with its own instructions, tool access, and permissions, then returns the useful result instead of flooding the main conversation with every search result, log, or file read. Skills, by contrast, add reusable knowledge or workflow guidance to the context that is already doing the work.
 
-The frontmatter `description` follows the same split: agent descriptions describe a role and judgment scope; skill descriptions start with action verbs and describe the deliverable.
+Use an **agent** when the work should have its own context.
+
+- The task will read many files, run broad searches, inspect logs, or produce intermediate output you do not need in the main conversation.
+- The same specialized worker should be reused with its own system prompt, tool access, model choice, permissions, or memory.
+- The result should come back as a summary, recommendation, patch, review, or decision.
+- _Examples:_ Backend Engineer, Product Manager, UX Designer, SEO Content Editor.
+
+Use a **skill** when the guidance should support an agent's current context.
+
+- The content is reusable knowledge, a checklist, a workflow, a quality bar, or domain-specific constraints.
+- Multiple agents could benefit from the same guidance without becoming that role.
+- The work depends on the surrounding conversation and should stay in that context.
+- _Examples:_ Privacy Policy, Cookie Policy, Terms of Service, Travel Itinerary, LinkedIn Post, HTML Email Template.
+
+They can compose. A skill can tell the current agent how to run a workflow, and that workflow can delegate pieces to agents. An agent can also preload or use skills so its own context starts with the right domain guidance.
+
+The frontmatter `description` follows the same split: agent descriptions say when to delegate to that worker and what context it should own; skill descriptions say when to load the guidance and what context it contributes.
 
 ## Disclaimer
 
@@ -73,7 +86,7 @@ After installing Gemini CLI skills, run `/skills reload` if Gemini CLI is alread
 
 ## Current Agents
 
-The repository includes seventeen agents.
+The repository includes seventeen agents. Use them when a role should own a focused task in a separate context window and return the result.
 
 | Role                      | Masterclass guide                                                          | Agent                                                                                  |
 | ------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
@@ -97,7 +110,7 @@ The repository includes seventeen agents.
 
 ## Current Skills
 
-The repository includes ten skills. Each lives under `skills/<name>/SKILL.md` so it can be dropped directly into a tool's skills directory.
+The repository includes ten skills. Each lives under `skills/<name>/SKILL.md` so it can be dropped directly into a tool's skills directory. Use them when an existing agent needs reusable context, constraints, or a workflow.
 
 | Skill                | Masterclass guide                                                          | Skill                                                                        |
 | -------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
@@ -119,15 +132,15 @@ Use this workflow:
 1. Start with [prompts/master-class.md](prompts/master-class.md).
 2. Run that prompt in a research-capable model.
 3. Generate a masterclass guide for a role or topic and save it in [guides/](guides).
-4. Decide whether the result is an agent or a skill (see [Agents vs Skills](#agents-vs-skills)).
+4. Decide whether the result needs its own context window or should support an existing one (see [Agents vs Skills](#agents-vs-skills)).
 5. Distill the guide into the matching artifact:
-   - For an agent: write `agents/<role>.agent.md` with role, principles, approach, constraints, and output format.
-   - For a skill: write `skills/<name>/SKILL.md` with description, inputs, constraints, procedure, branching logic, output format, quality checks, and failure modes.
+   - For an agent: write `agents/<role>.agent.md` with the worker's delegation scope, role, principles, approach, constraints, and output format.
+   - For a skill: write `skills/<name>/SKILL.md` with the guidance it contributes, inputs, constraints, procedure, branching logic, output format, quality checks, and failure modes.
 6. Refine until the guidance is opinionated, practical, and usable in real work.
 
 The guide is the research artifact. The agent or skill is the working artifact.
 
-Example output for a new role:
+Example output for a new agent:
 
 ```text
 Role: Security Engineer
@@ -135,7 +148,7 @@ Guide: guides/security-engineer.md
 Agent: agents/security-engineer.agent.md
 ```
 
-Example output for a new procedural skill:
+Example output for a new skill:
 
 ```text
 Topic: Cookie Policy
@@ -153,15 +166,15 @@ In GitHub Copilot Chat, use `/masterclass-guide <role>` to generate a research-f
 
 Shoutout to [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents/tree/main). That repository was the starting point for this project and showed how useful specialized agents can be.
 
-After using it, I realized I wanted agents that fit my own needs more closely. Instead of writing agents directly from scratch, this repository uses a research-first workflow: start with a strong masterclass, then turn that synthesis into an agent or a skill — whichever shape fits how the work is actually used.
+After using it, I realized I wanted agents that fit my own needs more closely. Instead of writing agents directly from scratch, this repository uses a research-first workflow: start with a strong masterclass, then turn that synthesis into an agent or a skill — whichever context shape fits how the work is actually used.
 
 That extra step matters. It keeps the artifacts grounded in durable practitioner guidance instead of ad hoc prompt writing.
 
 ## Repository Structure
 
 ```text
-agents/    Persona-driven agent definitions
-skills/    Procedural skill definitions (one folder per skill, with SKILL.md)
+agents/    Specialized workers that own their own context
+skills/    Reusable guidance for an agent's context (one folder per skill, with SKILL.md)
 guides/    Source masterclass guides
 prompts/   Prompt templates used to generate the guides
 .github/   Workspace-scoped GitHub Copilot customizations and CI workflows
@@ -174,7 +187,7 @@ mcagents   Bootstrap shell wrapper that downloads or runs the CLI
 If you add a new role or topic, keep both artifacts in the repository:
 
 1. Add the source guide to `guides/<name>.md`.
-2. Add the derived agent to `agents/<name>.agent.md` _or_ the derived skill to `skills/<name>/SKILL.md`.
+2. Add the derived agent to `agents/<name>.agent.md` if it needs its own context, _or_ the derived skill to `skills/<name>/SKILL.md` if it supports an existing context.
 3. Keep file and folder names in kebab-case.
 4. Make sure the guide and the agent or skill actually match.
 5. Update the relevant table in this README.

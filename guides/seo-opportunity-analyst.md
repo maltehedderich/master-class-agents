@@ -27,7 +27,7 @@ Opportunity isn't found in keyword lists — it's found at the intersection of a
 
 2. **Treat the SERP as the brief.**
    _Why:_ The current SERP encodes Google's interpretation of intent, format, and depth. You can't out-write a SERP that wants a free tool, a comparison table, or a video carousel. (Huang, Shepard, Solis all converge here.)
-   _How:_ For any candidate query, audit the top 10: dominant format (listicle, deep guide, calculator, forum), content type (informational, commercial, transactional), publisher type (brands, marketplaces, media, UGC), freshness signals, and SERP features (PAA, featured snippet, video, shopping). If the format doesn't match what you can credibly produce, the query isn't your opportunity.
+   _How:_ For any candidate query, audit the top 10: dominant format (listicle, deep guide, calculator, forum), content type (informational, commercial, transactional), publisher type (brands, marketplaces, media, UGC), freshness signals, and SERP features (PAA, featured snippet, video, shopping). Treat PAA as question-intent research, not as a reason to bolt on FAQ schema. If the format doesn't match what you can credibly produce, the query isn't your opportunity.
 
 3. **Map the topical territory before picking pieces.**
    _Why:_ Individual articles compete; clusters compound. Indig and Shepard both argue topical authority is built through _coverage_, not isolated wins.
@@ -53,6 +53,10 @@ Opportunity isn't found in keyword lists — it's found at the intersection of a
    _Why:_ Topical authority is enacted through linking, not declared by a sitemap. Shepard's body of work is consistent here — internal links are how you tell Google the cluster is a cluster.
    _How:_ In the cluster proposal, sketch which posts link to which, with anchor variation. The pillar should receive links from every cluster post; cluster posts should cross-link by genuine semantic relationship, not just proximity.
 
+9. **Separate FAQ usefulness from FAQ rich-result tactics.**
+   _Why:_ Google FAQ rich results are gone from Search as of May 7, 2026, so FAQPage schema should not be sold as a CTR or SERP-real-estate tactic. But useful FAQ content can still answer objections, increase topical completeness, support long-tail relevance, reduce support friction, and feed help centers or AI assistants.
+   _How:_ Recommend FAQ sections only when the questions come from real demand signals: Search Console queries, sales calls, support tickets, on-site search, product reviews, competitor gaps, or PAA-style intent research. Keep genuine FAQs; rewrite, merge, or remove SEO-only filler.
+
 ## Common Mistakes
 
 - **Confusing a keyword list with a strategy.** A spreadsheet of 200 queries sorted by volume is research output, not a plan — it has no thesis about audience, territory, or sequencing.
@@ -66,5 +70,6 @@ Opportunity isn't found in keyword lists — it's found at the intersection of a
 - **Score your draft clusters on demand × winnability × business value** (1–5 each) and shortlist the top three. Cut the rest from this quarter.
 - **Choose the _cluster_ (not pillar) with the cleanest intent match and weakest top-3 competition** as your first piece. Brief it against the SERP, not against a keyword.
 - **Sketch the internal link graph for the full cluster now**, even though you'll only ship one piece — every future article should already know where it links.
+- **Flag real FAQ opportunities only when they serve users or conversion**, not because FAQPage markup used to produce Google rich results.
 
 A note on confidence: the principles above represent durable convergence across these practitioners' published work; specific framings (e.g., "SERP as brief," "earn the right to compete") paraphrase recurring ideas rather than quote any single source verbatim.

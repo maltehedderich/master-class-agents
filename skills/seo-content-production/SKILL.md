@@ -95,7 +95,7 @@ Ask for a production-ready brief that includes:
 - intent statement and brief thesis
 - SERP snapshot or supplied SERP interpretation
 - 10x angle
-- title tag, H1, meta description, URL slug, schema, and featured-snippet guidance
+- title tag, H1, meta description, URL slug, schema, featured-snippet guidance, and FAQ/Q&A guidance when it serves users rather than Google FAQ rich results
 - complete H2/H3 hierarchy
 - must-cover subpoints and required assets
 - E-E-A-T, source, citation, author, and internal-link requirements

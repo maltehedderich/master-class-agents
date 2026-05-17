@@ -23,7 +23,7 @@ A great brief eliminates ambiguity. It tells the writer exactly which intent to 
 
 2. **Reverse-engineer the SERP before drafting the outline.**
    _Why:_ The current top results are Google's revealed preference — a brief written by users at scale.
-   _How:_ For the top 5–10 results, document content type, format (guide, listicle, comparison, tool), depth, structural assets (TOC, comparison tables, schema, original data, video), and — most importantly — what's _missing_ across all of them. The gaps are the brief's leverage points.
+   _How:_ For the top 5–10 results, document content type, format (guide, listicle, comparison, tool), depth, structural assets (TOC, comparison tables, schema, original data, video), question patterns, and — most importantly — what's _missing_ across all of them. The gaps are the brief's leverage points.
 
 3. **Specify the "10x angle" — how you win, not just that you win.**
    _Why:_ Length alone no longer ranks. Differentiation is the moat, and writers can't invent it on the fly.
@@ -39,11 +39,11 @@ A great brief eliminates ambiguity. It tells the writer exactly which intent to 
 
 6. **Engineer on-page elements deliberately inside the brief.**
    _Why:_ Title, H1, meta, URL, schema, and internal links compound rankings; they're too important to be writer afterthoughts.
-   _How:_ Pre-draft the title tag, meta description, URL slug, H1, target schema type, 3–5 priority internal links (inbound and outbound), and the featured-snippet answer block (paragraph, list, or table) written out in final form.
+   _How:_ Pre-draft the title tag, meta description, URL slug, H1, target schema type, 3–5 priority internal links (inbound and outbound), and the featured-snippet answer block (paragraph, list, or table) written out in final form. If FAQ content belongs on the page, specify it because it answers real user questions or removes conversion friction, not because FAQPage markup can win Google SERP real estate.
 
 7. **Define "done" with measurable acceptance criteria.**
    _Why:_ Briefs without a checklist become aspirational; pages ship missing the very elements that were supposed to make them rank.
-   _How:_ Close every brief with a binary checklist: intent match confirmed, all required sections present, 10x angle delivered, internal links placed, schema implemented, alt text written, expert/author requirements met, citations verified.
+   _How:_ Close every brief with a binary checklist: intent match confirmed, all required sections present, 10x angle delivered, internal links placed, schema implemented where genuinely useful, FAQ content justified or omitted, alt text written, expert/author requirements met, citations verified.
 
 8. **Treat the brief as a living artifact tied to performance.**
    _Why:_ SERPs shift, intent drifts, and AI Overviews are actively reshaping click behavior. A static brief decays.
@@ -60,5 +60,6 @@ A great brief eliminates ambiguity. It tells the writer exactly which intent to 
 - Build a one-page brief template with mandatory fields: **Intent Statement, SERP Snapshot, 10x Angle, Heading Outline, On-Page Elements, E-E-A-T Requirements, Internal Links, Acceptance Checklist** — and refuse to send anything missing a field.
 - Before outlining, screenshot the top 5 SERP results and write one sentence on each: format, depth, unique asset, and a visible weakness. If you can't name a weakness, the opportunity isn't real yet.
 - Pre-write the meta title and the featured-snippet answer block in the brief itself; if you can't draft sharper versions than what's currently ranking, escalate or kill the brief.
+- Treat FAQPage schema as valid markup only for genuine FAQ content, not as a Google FAQ rich-result tactic. Google FAQ rich results no longer appear in Search as of May 7, 2026.
 - Name the human source of expertise (author, contributor, or first-hand tester) in the brief. If no name exists, the plan to add one is the first task — not the page draft.
 - Set a 90-day review date inside the brief so it travels with the content and stays a living artifact rather than a one-shot spec.

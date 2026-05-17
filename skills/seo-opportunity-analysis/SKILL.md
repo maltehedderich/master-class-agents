@@ -169,6 +169,7 @@ For the chosen target query, produce a standard SERP block with:
 - top-5 SERP table
 - table-stakes inventory
 - gap inventory
+- question and rich-content opportunities
 - go or no-go judgment
 
 Use this top-5 table schema:
@@ -182,6 +183,14 @@ Use this table-stakes inventory schema:
 - notable SERP features
 - recurring subtopics
 - credibility signals and E-E-A-T expectations
+
+Use this question and rich-content schema:
+
+- real user questions worth answering, if any
+- source of those questions: PAA-style research, Search Console queries, support/sales questions, on-site search, reviews, or competitor gaps
+- likely page placement: body section, comparison block, pricing/support section, help-center article, or FAQ section
+- reason to include: conversion, support deflection, topical completeness, long-tail relevance, or content reuse
+- schema note: FAQPage markup may be valid for genuine FAQ content, but Google FAQ rich results no longer appear in Search as of May 7, 2026; do not recommend FAQ schema as a Google rich-result or CTR tactic
 
 Use this gap inventory schema:
 
@@ -220,8 +229,9 @@ Write the Markdown report in this order:
 4. Ranked opportunities — explain demand, winnability, and business value.
 5. First-piece recommendation — the single piece to write first, plus `cluster-first` or `pillar-first` rationale.
 6. Standard SERP block for the first piece's target query.
-7. E-E-A-T angle.
-8. Assumptions, risks, and missing inputs.
+7. Question and rich-content opportunities, including whether FAQ content is useful for users or conversion.
+8. E-E-A-T angle.
+9. Assumptions, risks, and missing inputs.
 
 After writing the file, reply with the report path and a short summary of the recommendation. Do not paste the whole report into chat unless the user asks for it.
 
@@ -236,6 +246,7 @@ The work is ready only when all of the following are true:
 5. The first-piece recommendation has a clear, defensible reason tied to intent ROI or strategic seeding.
 6. The chosen query has a live SERP analysis, not a guessed one.
 7. The E-E-A-T angle is specific to the spec and not generic founder-posturing.
+8. Any FAQ recommendation is grounded in real user need and not framed as a Google FAQ rich-result tactic.
 
 ## Failure Modes To Avoid
 
@@ -246,6 +257,7 @@ The work is ready only when all of the following are true:
 - Ignoring obvious intent mismatch in the SERP.
 - Proposing sprawling topic maps that the founder cannot realistically cover.
 - Pushing through a no-win SERP instead of returning adjacent territories.
+- Adding FAQ sections or FAQPage schema because an SEO checklist expects it, rather than because the content helps users.
 
 ## Escalation Rules
 

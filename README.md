@@ -110,7 +110,7 @@ The repository includes seventeen agents. Use them when a role should own a focu
 
 ## Current Skills
 
-The repository includes ten skills. Each lives under `skills/<name>/SKILL.md` so it can be dropped directly into a tool's skills directory. Use them when an existing agent needs reusable context, constraints, or a workflow.
+The repository includes eleven skills. Each lives under `skills/<name>/SKILL.md` so it can be dropped directly into a tool's skills directory. Use them when an existing agent needs reusable context, constraints, or a workflow.
 
 | Skill                | Masterclass guide                                                          | Skill                                                                        |
 | -------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
@@ -124,6 +124,7 @@ The repository includes ten skills. Each lives under `skills/<name>/SKILL.md` so
 | SEO Opportunity Analysis | [guides/seo-opportunity-analyst.md](guides/seo-opportunity-analyst.md)   | [skills/seo-opportunity-analysis/SKILL.md](skills/seo-opportunity-analysis/SKILL.md) |
 | Terms of Service     | [guides/terms-of-service-expert.md](guides/terms-of-service-expert.md)     | [skills/terms-of-service/SKILL.md](skills/terms-of-service/SKILL.md)         |
 | Travel Planner       | [guides/travel-planner.md](guides/travel-planner.md)                       | [skills/travel-planner/SKILL.md](skills/travel-planner/SKILL.md)             |
+| UI Writing           | [guides/ui-writing.md](guides/ui-writing.md)                               | [skills/ui-writing/SKILL.md](skills/ui-writing/SKILL.md)                     |
 
 ## Create a New Agent or Skill
 

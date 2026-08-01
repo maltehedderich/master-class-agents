@@ -1,0 +1,4 @@
+interface:
+  display_name: "UI Writing"
+  short_description: "Write clear, trustworthy product interface copy"
+  default_prompt: "Use $ui-writing to draft and review the copy for this product flow."

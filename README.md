@@ -110,10 +110,11 @@ The repository includes seventeen agents. Use them when a role should own a focu
 
 ## Current Skills
 
-The repository includes eleven skills. Each lives under `skills/<name>/SKILL.md` so it can be dropped directly into a tool's skills directory. Use them when an existing agent needs reusable context, constraints, or a workflow.
+The repository includes twelve skills. Each lives under `skills/<name>/SKILL.md` so it can be dropped directly into a tool's skills directory. Use them when an existing agent needs reusable context, constraints, or a workflow.
 
 | Skill                | Masterclass guide                                                          | Skill                                                                        |
 | -------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Apple Ads Keywords   | [guides/apple-ads-keywords.md](guides/apple-ads-keywords.md)                 | [skills/apple-ads-keywords/SKILL.md](skills/apple-ads-keywords/SKILL.md)         |
 | Cookie Policy        | [guides/cookie-policy-expert.md](guides/cookie-policy-expert.md)           | [skills/cookie-policy/SKILL.md](skills/cookie-policy/SKILL.md)               |
 | HTML Email Templates | [guides/html-email-templates.md](guides/html-email-templates.md)           | [skills/html-email-templates/SKILL.md](skills/html-email-templates/SKILL.md) |
 | Idiomatic Go         | [guides/go-language.md](guides/go-language.md)                             | [skills/idiomatic-go/SKILL.md](skills/idiomatic-go/SKILL.md)                 |

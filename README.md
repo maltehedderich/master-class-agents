@@ -110,7 +110,7 @@ The repository includes seventeen agents. Use them when a role should own a focu
 
 ## Current Skills
 
-The repository includes twelve skills. Each lives under `skills/<name>/SKILL.md` so it can be dropped directly into a tool's skills directory. Use them when an existing agent needs reusable context, constraints, or a workflow.
+The repository includes thirteen skills. Each lives under `skills/<name>/SKILL.md` so it can be dropped directly into a tool's skills directory. Use them when an existing agent needs reusable context, constraints, or a workflow.
 
 | Skill                | Masterclass guide                                                          | Skill                                                                        |
 | -------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
@@ -120,6 +120,7 @@ The repository includes twelve skills. Each lives under `skills/<name>/SKILL.md`
 | Idiomatic Go         | [guides/go-language.md](guides/go-language.md)                             | [skills/idiomatic-go/SKILL.md](skills/idiomatic-go/SKILL.md)                 |
 | Landing Page Copy    | [guides/landing-page-copywriter.md](guides/landing-page-copywriter.md)     | [skills/landing-page-copy/SKILL.md](skills/landing-page-copy/SKILL.md)       |
 | LinkedIn Post        | [guides/linkedin-writer.md](guides/linkedin-writer.md)                     | [skills/linkedin-post/SKILL.md](skills/linkedin-post/SKILL.md)               |
+| Motion Design Review | [guides/motion-design.md](guides/motion-design.md)                         | [skills/motion-design-review/SKILL.md](skills/motion-design-review/SKILL.md) |
 | Privacy Policy       | [guides/privacy-policy-expert.md](guides/privacy-policy-expert.md)         | [skills/privacy-policy/SKILL.md](skills/privacy-policy/SKILL.md)             |
 | SEO Content Production | [guides/seo-brief-architect.md](guides/seo-brief-architect.md), [guides/seo-content-drafter.md](guides/seo-content-drafter.md), [guides/seo-content-editor.md](guides/seo-content-editor.md) | [skills/seo-content-production/SKILL.md](skills/seo-content-production/SKILL.md) |
 | SEO Opportunity Analysis | [guides/seo-opportunity-analyst.md](guides/seo-opportunity-analyst.md)   | [skills/seo-opportunity-analysis/SKILL.md](skills/seo-opportunity-analysis/SKILL.md) |
